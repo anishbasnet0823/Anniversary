@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 1st Anniversary</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      color: #4b0082;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px;
+      background: #ff9a9e;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 3em;
+      animation: fadeInDown 2s ease-in-out;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section {
+      margin: 40px auto;
+      padding: 20px;
+      max-width: 900px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      animation: slideUp 1.5s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      color: #ff69b4;
+      font-size: 2em;
+    }
+
+    .timeline {
+      list-style: none;
+      padding: 0;
+    }
+
+    .timeline li {
+      margin-bottom: 15px;
+      text-align: left;
+      padding: 10px;
+      background: #ffe4e1;
+      border-left: 3px solid #ff69b4;
+      border-radius: 5px;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .memory-grid div {
+      padding: 15px;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      border-radius: 10px;
+      color: #fff;
+      text-align: center;
+      font-size: 1.1em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+      padding: 15px 30px;
+      margin: 10px;
+      background-color: #ff69b4;
+      color: #fff;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #db7093;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      background: #ff9a9e;
+      color: #fff;
+      text-align: center;
+      border-radius: 15px 15px 0 0;
+    }
+
+    footer p {
+      margin: 10px 0;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff69b4;
+      opacity: 0.7;
+      animation: floatUp 6s infinite ease-in-out;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) scale(1);
+      }
+      to {
+        transform: translateY(-10vh) scale(1.5);
+      }
+    }
+
+    .media-grid {
+    display: flex;
+    flex-direction: column; /* Stack items in a column */
+    gap: 20px;
+    margin-top: 20px;
+    align-items: center; /* Center items horizontally */
+  }
+
+  .media-grid div {
+    background: linear-gradient(to right, #ffdde1, #ee9ca7);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80%; /* Adjust the width of media items */
+    max-width: 600px; /* Optional: Limit the maximum width */
+  }
+
+  .media-grid img,
+  .media-grid video {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .hidden-message-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .reveal-button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .reveal-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Falling I Love You */
+    .falling-message {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 36px;
+      font-weight: bold;
+      color: #FF4081;
+      opacity: 0;
+      display: none;
+      animation: fallIn 2s ease forwards;
+    }
+
+    @keyframes fallIn {
+      0% {
+        top: -100px;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.5);
+      }
+      50% {
+        top: 40%;
+        opacity: 1;
+        transform: translateX(-50%) scale(1.2);
+      }
+      100% {
+        top: 50%;
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
+    /* Confetti styles */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #FF4081;
+      animation: confetti-fall 2s linear infinite;
+      top: -20px;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100%) rotate(0deg);
+      }
+      100% {
+        transform: translateY(120vh) rotate(720deg);
+      }
+    }
+
+    .hidden-letter-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .reveal-button {
+      padding: 15px 30px;
+      margin: 10px;
+      background-color: #ff69b4;
+      color: #fff;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .reveal-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Hidden love letter styles */
+    #loveLetter {
+      background-color: #FFEBF1;
+      border: 2px solid #FF4081;
+      border-radius: 15px;
+      padding: 20px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      display: none;
+      animation: revealEffect 1.5s ease forwards;
+    }
+
+    @keyframes revealEffect {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+     
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Happy 1st Anniversary, Bebu</h1>
+    <p>A celebration of our love, memories, and dreams together.</p>
+  </header>
+
+  <div class="floating-hearts"></div>
+
+  <section>
+    <h2>Our Journey So Far</h2>
+    <ul class="timeline">
+      <li><strong>2018/19:</strong> First time I saw this beautiful girl.</li>
+      <li><strong>2018/19:</strong> First time tmi sanga bolya ni yei year ma ho exam ma</li>
+      <li><strong>2021:</strong> My message got ignored.</li>
+      <li><strong>4th October 2023:</strong> First message: 'Sanchai xau?' on Messenger.(Tyo ni sochda sochda patham ki napatham vanera pathako)</li>
+      <li><strong>19th November 2023:</strong> When we grew closer.</li>
+      <li><strong>18th January 2024:</strong> First conversation on Whatsapp.</li>
+      <li><strong>26th January 2024:</strong> Our relationship began.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Memories</h2>
+    <div class="memory-grid">
+      <div onclick="showMemory('First Reel', 'First reel kasley ra kailey pathako ho?(Name Date/Month/Year yo format ma answer dinu haii)', 'Anish 21/11/2023')">First Reel</div>
+      <div onclick="showMemory('Our Favorite Song', 'Guess the song that remind me of you?(Spelling pani milnu parxa haii, 2 ota choose garnu parxa).', 'Heeriye, Saudebazi')">Our Favorite Song</div>
+      <div onclick="showMemory('Longest Video Call', 'How long was our longest video call?(X hrs, Y min, Z sec yo format ma answer deu haii)', '7 hrs, 4 min, 1 sec')">Longest video call</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fun Activities</h2>
+    <button class="button" onclick="startQuiz()">Take a Quiz</button>
+    <div class="hidden-letter-container">
+      <button class="reveal-button" onclick="revealLoveLetter()">Reveal Love Letter</button>
+      <div id="loveLetter">
+        <p>My Dearest Sanuu,</p>
+        <p> 
+
+Happy First Love Anniversary❤️  
+
+It feels like just yesterday that we started this beautiful journey together on 26th January 2024, yet here we are, celebrating a year filled with love, laughter, and countless memories. I still remember the very first time I messaged you, asking, "Sanchai xau?"(Yo kura dherai mention vaisakyo tara) That simple moment turned into something so extraordinary—it brought me you, the most precious part of my life.  
+
+As I look back on this year, my heart is overflowing with gratitude and happiness. From those sweet and innocent talks in the beginning to the playful and open conversations about everything under the sun (yes, even those 18+ topics 😅), we've grown so much closer.  
+
+Do you remember the day our connection deepened? 19th November 2023 will always have a special place in my heart. It was then that I truly realized how much you mean to me. You made me feel so comfortable, understood, and loved.  
+
+Even though we’re in a long-distance relationship, your love has never felt far away. Every call, every message, and every memory we've shared has been a testament to how strong and special our bond is. You’ve been my source of joy, my support, and my peace, even when we’re miles apart.  
+
+This year, you've taught me so much about love. You’ve shown me that true love is about understanding, patience, and being there for each other through it all. I cherish every moment we've spent together and every plan we’ve made for the future.  
+
+As we celebrate this milestone, I want you to know that this is just the beginning of our story. I promise to keep loving you, supporting you, and making you smile every single day. I’m also so excited for all the surprises I have in store for you this anniversary (yes, including the website I’m building just for us!).  
+
+Thank you for being the most amazing girlfriend and for making this past year the best year of my life. You are my sunshine, my inspiration, and my everything.  
+
+Here’s to us, Sanu. Here’s to one year of love and many, many more to come. Happy First Love Anniversary, Pukuli Babyyy. I love you more than words could ever express.  
+
+        </p>
+        <p>Forever yours,<br>Anish (Tmro pyarooo babyyyy) ❤️</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Quiz Section (Initially hidden) -->
+  <section id="quizSection" style="display: none;">
+    <h3>Quiz: How well do you know me?</h3>
+    <div id="quizQuestion"></div>
+    <div id="answers"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+  </section>
+  
+  <section>
+    <h2>Days We've Been Together</h2>
+    <p>We have been together for <strong id="daysTogether">XX days</strong> and counting! ❤️</p>
+  </section>
+
+  <section>
+    <h2>Our Special Moments</h2>
+    <div class="media-grid">
+      <div>
+        <img src="AA.jpeg" alt="You and Me" />
+      </div>
+      <div>
+        <img src="AA1.jpeg" alt="Special Moment" />
+      </div>
+      <div>
+        <video controls>
+          <source src="V1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>  
+
+  <section>
+    <div class="hidden-message-container">
+      <button class="reveal-button" onclick="revealMessage()">Ya thicatw</button>
+      <div id="hiddenMessage" class="falling-message">ILoveYouMeroPukuliBaby❤️</div>
+    </div>
+  </section>
+
+  <footer>
+    <h2>To My Dearest Sanu,</h2>
+    <p>This is just the beginning of a lifetime of love and memories. I love you endlessly.</p>
+    <p><strong>- Anish(Tmro pyarooo babyyy)</strong></p>
+  </footer>
+  
+
+  <script>
+    const heartContainer = document.querySelector('.floating-hearts');
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+      heartContainer.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 500);
+
+    function showMemory(title, question, correctAnswer) {
+  const userAnswer = prompt(`${title}:\n\n${question}`);
+  if (userAnswer === null) {
+    alert('Kina cancel gareko?');
+    return;
+  }
+  if (userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+    alert(`Kati janney ho mero bebu sabai tharaixa 🎉`);
+  } else {
+    alert(`Oh no, mero bebu lai te mero barema kei tharainaxa! 😢 Sahi uttar ho : ${correctAnswer}.`);
+  }
+}
+
+//JS Code for Quiz
+
+const questions = [
+  {
+    question: "What's my favorite color?",
+    answers: ["Red", "Blue", "White", "Black"],
+    correctAnswer: "Black"
+  },
+  {
+    question: "What's my favorite food?",
+    answers: ["Pizza", "MoMo", "Burgers", "Chowein"],
+    correctAnswer: "MoMo"
+  },
+  {
+    question: "Where did we first meet?",
+    answers: ["At school", "At the mall", "On a trip", "In a cafe"],
+    correctAnswer: "At school"
+  },
+  {
+    question: "What did I want to be as a kid?",
+    answers: ["Doctor", "Pilot", "Sportsman", "Hero"],
+    correctAnswer: "Sportsman"
+  },
+  {
+    question: "What's my shoe size?",
+    answers: ["7", "8", "9", "10"],
+    correctAnswer: "9"
+  },
+  {
+    question: "What was my first impression of you?",
+    answers: ["Smart", "Beauty", "Caring", "Loving"],
+    correctAnswer: "Beauty"
+  },
+  {
+    question: "Whats my favourite way to spend time with you?",
+    answers: ["Play game", "Voice Call", "Watch movie", "Video Call"],
+    correctAnswer: "Video Call"
+  },
+  {
+    question: "Which country would I like to visit in future?",
+    answers: ["US", "Switzerland", "Singapore", "Italy"],
+    correctAnswer: "Switzerland"
+  },
+  // {
+  //   question: "Do I prefer coffee or tea?",
+  //   answers: ["Coffee", "Tea"],
+  //   correctAnswer: "Tea"
+  // },
+  {
+    question: "How many language do I speak?",
+    answers: ["1", "2", "3", "4"],
+    correctAnswer: "3"
+  },
+  {
+    question: "Whats my favourite position?",
+    answers: ["?", "??", "???", "????"],
+    correctAnswer: "??"
+  },
+  {
+    question: "Do I prefer singing or dancing?",
+    answers: ["Singing", "Dancing"],
+    correctAnswer: "Singing"
+  },
+  {
+    question: "When was the first time i fell in love with you?",
+    answers: ["When i saw you for the first time"],
+    correctAnswer: "When i saw you for the first time"
+  },
+
+
+];
+
+let currentQuestionIndex = 0;
+let correctAnswers = 0; 
+
+function startQuiz() {
+  document.querySelector("section").style.display = "none"; // Hide the Fun Activities section
+  document.getElementById("quizSection").style.display = "block"; // Show the Quiz section
+  correctAnswers = 0; // Reset correct answers for each quiz
+  showQuestion(currentQuestionIndex);
+}
+
+function showQuestion(index) {
+  const questionObj = questions[index];
+  document.getElementById("quizQuestion").innerText = questionObj.question;
+  const answersDiv = document.getElementById("answers");
+  answersDiv.innerHTML = ""; // Clear previous answers
+
+  questionObj.answers.forEach(answer => {
+    const button = document.createElement("button");
+    button.textContent = answer;
+    button.onclick = () => checkAnswer(answer, questionObj.correctAnswer);
+    answersDiv.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedAnswer, correctAnswer) {
+  if (selectedAnswer === correctAnswer) {
+    alert("Milyo! 🎉");
+    correctAnswers++; 
+  } else {
+    alert("Oops, milena! 😅");
+  }
+  nextQuestion();
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    showQuestion(currentQuestionIndex);
+  } else {
+    // Show the result
+    alert(`Tmley ${correctAnswers} ota milayeu ${questions.length} ota questions madye!`); 
+    document.getElementById("quizSection").style.display = "none"; // Hide the quiz section
+    document.querySelector("section").style.display = "block"; // Show the Fun Activities section
+    currentQuestionIndex = 0; // Reset for the next time
+  }
+}
+
+function revealLoveLetter() {
+      const loveLetter = document.getElementById("loveLetter");
+      loveLetter.style.display = "block"; // Show the love letter
+    }
+
+// Reveal the hidden message with falling animation
+function revealMessage() {
+      const hiddenMessage = document.getElementById("hiddenMessage");
+      hiddenMessage.style.display = "block"; // Make the hidden message visible
+
+      // Create confetti effect
+      for (let i = 0; i < 100; i++) {
+        createConfetti();
+      }
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+      confetti.style.backgroundColor = getRandomColor();
+      confetti.style.animationDuration = Math.random() * 2 + 3 + "s"; // Random duration
+      document.body.appendChild(confetti);
+
+      // Remove confetti after it falls
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000);
+    }
+
+    // Generate random colors for confetti
+    function getRandomColor() {
+      const colors = ["#FF4081", "#FFC107", "#4CAF50", "#2196F3", "#9C27B0"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    // Your relationship start date
+const relationshipStartDate = new Date("2024-01-26"); // Adjust the date here
+    const currentDate = new Date();
+
+    // Calculate the difference in days
+    const timeDifference = currentDate - relationshipStartDate; // Difference in milliseconds
+    const daysTogether = Math.floor(timeDifference / (1000 * 60 * 60 * 24)); // Convert to days
+
+    // Update the DOM
+    document.getElementById("daysTogether").textContent = daysTogether;
+
+  </script>
+</body>
+
+</html>
